@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { connectDB } from "@/lib/mongodb";
 import Student from "@/models/Student";
-
+export const dynamic = "force-dynamic";
 export default async function ParentDashboard() {
   await connectDB();
 
