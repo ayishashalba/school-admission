@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 interface Student {
   _id: string;
@@ -25,6 +25,22 @@ interface Student {
 }
 
 export default function AdmissionSuccessPage() {
+      return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-gray-50">
+          <p className="text-gray-500">
+            Loading admission details...
+          </p>
+        </main>
+      }
+    >
+      <AdmissionSuccessContent />
+    </Suspense>
+  );
+}
+
+function AdmissionSuccessContent() {
   const searchParams = useSearchParams();
   const studentId = searchParams.get("id");
 
