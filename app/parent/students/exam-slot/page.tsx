@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense,useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -15,6 +15,22 @@ interface Student {
 }
 
 export default function ExamSlotPage() {
+   return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-gray-50">
+          <p className="text-gray-500">
+            Loading...
+          </p>
+        </main>
+      }
+    >
+      <ExamSlotContent />
+    </Suspense>
+  );
+}
+
+function ExamSlotContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 

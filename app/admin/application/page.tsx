@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -36,6 +37,22 @@ interface Student {
 }
 
 export default function ApplicationPage() {
+    return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-gray-50">
+          <p className="text-gray-500">
+            Loading application...
+          </p>
+        </main>
+      }
+    >
+      <ApplicationContent />
+    </Suspense>
+  );
+}
+
+function ApplicationContent() {
   const searchParams = useSearchParams();
 
   const studentId = searchParams.get("id");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense,useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -15,6 +15,22 @@ interface Student {
 }
 
 export default function AdmissionPage() {
+    return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-screen items-center justify-center bg-gray-50">
+          <p className="text-gray-500">
+            Loading admission details...
+          </p>
+        </main>
+      }
+    >
+      <AdmissionContent />
+    </Suspense>
+  );
+}
+
+function AdmissionContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
